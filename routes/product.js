@@ -55,7 +55,7 @@ router.all('/:productID', function (req, res, next) {
 
 router.post('/product-handle', function (req, res, next) {
     if (!req.session.user) {
-        
+        res.send(`Bạn cần đăng nhập để thêm vào giỏ hàng.`);
     } else {
         var x = {
             id: req.body.id,
@@ -76,7 +76,7 @@ router.post('/product-handle', function (req, res, next) {
             req.session.cart.push(x);
         }
 
-        
+        res.send(`Đã thêm ${req.body.quantity} sản phẩm vào giỏ hàng. ID: ${req.body.id}`);
     }
 });
 
