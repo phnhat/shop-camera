@@ -53,6 +53,31 @@ router.all('/:productID', function (req, res, next) {
     }
 });
 
+router.post('/product-handle', function (req, res, next) {
+    if (!req.session.user) {
+        
+    } else {
+        var x = {
+            id: req.body.id,
+            quantity: parseInt(req.body.quantity)
+        }
 
+        var isExist = false;
+
+        for (var k = 0; k < req.session.cart.length; k++) {
+            if (req.session.cart[k].id == x.id) {
+                req.session.cart[k].quantity += parseInt(x.quantity);
+                isExist = true;
+                break;
+            }
+        }
+
+        if (isExist == false) {
+            req.session.cart.push(x);
+        }
+
+        
+    }
+});
 
 module.exports = router;
