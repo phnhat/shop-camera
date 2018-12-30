@@ -16,15 +16,7 @@ router.get('/', function (req, res, next) {
         var cart = req.session.cart;
         productDAO.loadByCart(cart).then(result => {
             var total = 0;
-            for (var i = 0; i < result.length; i++) {
-                result[i].gia_f = priceFormat(result[i].gia);
-                for (var j = 0; j < cart.length; j++) {
-                    if (result[i].idsanpham == cart[j].id) {
-                        result[i].quantity = cart[j].quantity;
-                    }
-                }
-                total += result[i].gia * result[i].quantity;
-            }
+           
             res.render('purchase/cart', {
                 title: 'Giỏ hàng | CamShop',
                 empty: false,
@@ -41,17 +33,9 @@ router.get('/purchase', function (req, res, next) {
         res.redirect('/cart');
     } else {
         var cart = req.session.cart;
-        productDAO.loadByCart(cart).then(result => {
-            var total = 0;
-            for (var i = 0; i < result.length; i++) {
-                result[i].gia_f = priceFormat(result[i].gia);
-                for (var j = 0; j < cart.length; j++) {
-                    if (result[i].idsanpham == cart[j].id) {
-                        result[i].quantity = cart[j].quantity;
-                    }
-                }
+        
                 total += result[i].gia * result[i].quantity;
-            }
+            
             res.render('purchase/purchase', {
                 title: 'Thanh toán đơn hàng | CamShop',
                 money: total,
@@ -60,7 +44,7 @@ router.get('/purchase', function (req, res, next) {
             });
         });
     }
-});
+
 
 router.post('/purchase', function (req, res, next) {
     var orderId = randomOrder();
