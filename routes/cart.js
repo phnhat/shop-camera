@@ -28,22 +28,6 @@ router.get('/', function (req, res, next) {
     }
 });
 
-router.get('/purchase', function (req, res, next) {
-    if (req.session.cart.length == 0) {
-        res.redirect('/cart');
-    } else {
-        var cart = req.session.cart;
-        
-                total += result[i].gia * result[i].quantity;
-            
-            res.render('purchase/purchase', {
-                title: 'Thanh toán đơn hàng | CamShop',
-                money: total,
-                money_f: priceFormat(total),
-                defaultName: req.session.user.hoten
-            });
-        });
-    }
 
 
 router.post('/purchase', function (req, res, next) {
