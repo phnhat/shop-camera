@@ -9,10 +9,6 @@ router.get('/', function(req, res, next) {
   console.log('----- Current Session -----')
   console.log(req.session);
   console.log('---------------------------');
-  productDAO.load10Newest()
-  .then(list10Newest => {
-    productDAO.load10BestSell()
-    .then(list10BestSell => {
       productDAO.load10MostViews()
       .then(list10MostViews => {
         for(let i = 0; i < 10; i++) {
@@ -34,10 +30,6 @@ router.get('/', function(req, res, next) {
     .catch(error2 => {
       // Lỗi khi load 10 sản phẩm bán chạy nhất
     });
-  })
-  .catch(error1 => {
-    // Lỗi khi load 10 sản phẩm mới nhất
-  });
-});
+
 
 module.exports = router;
