@@ -53,5 +53,31 @@ router.all('/:productID', function (req, res, next) {
     }
 });
 
+router.post('/product-handle', function (req, res, next) {
+    if (!req.session.user) {
+        res.send(`Bạn cần đăng nhập để thêm vào giỏ hàng.`);
+    } else {
+        var x = {
+            id: req.body.id,
+            quantity: parseInt(req.body.quantity)
+        }
+
+        var isExist = false;
+
+        for (var k = 0; k < req.session.cart.length; k++) {
+            if (req.session.cart[k].id == x.id) {
+                req.session.cart[k].quantity += parseInt(x.quantity);
+                isExist = true;
+                break;
+            }
+        }
+
+        if (isExist == false) {
+            req.session.cart.push(x);
+        }
+
+        res.send(`Đã thêm ${req.body.quantity} sản phẩm vào giỏ hàng. ID: ${req.body.id}`);
+    }
+});
 
 module.exports = router;
