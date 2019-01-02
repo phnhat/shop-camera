@@ -3,7 +3,7 @@ var router = express.Router();
 
 router.get('/', (req, res, next) => {
     res.render('contact', {
-        title: 'Liên hệ với CamShop'
+        title: 'Liên hệ | CamShop'
     });
 });
 

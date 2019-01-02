@@ -1,0 +1,175 @@
+<div class="index-main container">
+    <h3 class="title">Top 10
+        <span>Sản phẩm</span>
+    </h3>
+    <div id="horizontalTab">
+        <ul class="resp-tabs-list">
+            <li>Mới nhất</li>
+            <li>Bán chạy nhất</li>
+            <li>Xem nhiều nhất</li>
+        </ul>
+        <div class="resp-tabs-container">
+            <div class="tab1">
+                {{#each newest_list}}
+                <div class="col-md-3 product-cell">
+                    <div class="men-pro-item simpleCart_shelfItem">
+                        <div class="men-thumb-item">
+                            <img src="/product_img/{{img}}" class="pro-image-front">
+                            <img src="/product_img/{{img}}" class="pro-image-back">
+                            <div class="men-cart-pro">
+                                <div class="inner-men-cart-pro">
+                                    <a href="/product/{{idsanpham}}" class="link-product-add-cart">Xem chi tiết</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item-info-product">
+                            <h4>
+                                <a href="/product/{{idsanpham}}">{{tensanpham}}</a>
+                            </h4>
+                            <div class="info-product-price">
+                                <span class="item_price">{{gia_f}} VND</span>
+                            </div>
+                            <div style="text-align: center; font-size: 0.9em;">
+                                <span class="nview glyphicon glyphicon-eye-open"></span>
+                                <span class="nview">{{luotxem}}</span>
+                                <span>
+                                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                                </span>
+                                <span class="nsold glyphicon glyphicon-check"></span>
+                                <span class="nsold">{{luotban}}</span>
+                            </div>
+                            <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
+                                <form class="product-cell-form">
+                                    <fieldset>
+                                        <input type="hidden" name="productId" value="{{idsanpham}}" />
+                                        <input type="submit" value="Thêm vào giỏ" class="button" />
+                                    </fieldset>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {{/each}}
+                <div class="clearfix"></div>
+            </div>
+            <div class="tab2">
+                {{#each bestsell_list}}
+                <div class="col-md-3 product-cell">
+                    <div class="men-pro-item simpleCart_shelfItem">
+                        <div class="men-thumb-item">
+                            <img src="/product_img/{{img}}" class="pro-image-front">
+                            <img src="/product_img/{{img}}" class="pro-image-back">
+                            <div class="men-cart-pro">
+                                <div class="inner-men-cart-pro">
+                                    <a href="/product/{{idsanpham}}" class="link-product-add-cart">Xem chi tiết</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item-info-product">
+                            <h4>
+                                <a href="/product/{{idsanpham}}">{{tensanpham}}</a>
+                            </h4>
+                            <div class="info-product-price">
+                                <span class="item_price">{{gia_f}} VND</span>
+                            </div>
+                            <div style="text-align: center; font-size: 0.9em;">
+                                <span class="nview glyphicon glyphicon-eye-open"></span>
+                                <span class="nview">{{luotxem}}</span>
+                                <span>
+                                    &nbsp; &nbsp; &nbsp;
+                                </span>
+                                <span class="nsold glyphicon glyphicon-check"></span>
+                                <span class="nsold">{{luotban}}</span>
+                            </div>
+                            <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
+                                <form class="product-cell-form">
+                                    <fieldset>
+                                        <input type="hidden" name="productId" value="{{idsanpham}}" />
+                                        <input type="submit" value="Thêm vào giỏ" class="button" />
+                                    </fieldset>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {{/each}}
+                <div class="clearfix"></div>
+            </div>
+            <div class="tab3">
+                {{#each mostviews_list}}
+                <div class="col-md-3 product-cell">
+                    <div class="men-pro-item simpleCart_shelfItem">
+                        <div class="men-thumb-item">
+                            <img src="/product_img/{{img}}" class="pro-image-front">
+                            <img src="/product_img/{{img}}" class="pro-image-back">
+                            <div class="men-cart-pro">
+                                <div class="inner-men-cart-pro">
+                                    <a href="/product/{{idsanpham}}" class="link-product-add-cart">Xem chi tiết</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item-info-product">
+                            <h4>
+                                <a href="/product/{{idsanpham}}">{{tensanpham}}</a>
+                            </h4>
+                            <div class="info-product-price">
+                                <span class="item_price">{{gia_f}} VND</span>
+                            </div>
+                            <div style="text-align: center; font-size: 0.9em;">
+                                <span class="nview glyphicon glyphicon-eye-open"></span>
+                                <span class="nview">{{luotxem}}</span>
+                                <span>
+                                    &nbsp; &nbsp; &nbsp;
+                                </span>
+                                <span class="nsold glyphicon glyphicon-check"></span>
+                                <span class="nsold">{{luotban}}</span>
+                            </div>
+                            <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
+                                <form class="product-cell-form">
+                                    <fieldset>
+                                        <input type="hidden" name="productId" value="{{idsanpham}}" />
+                                        <input type="submit" value="Thêm vào giỏ" class="button" />
+                                    </fieldset>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {{/each}}
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+    {{!-- <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">Thông báo</h4>
+                </div>
+                <div class="modal-body">
+                    {{!-- Message Here --}}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Đóng lại</button>
+                </div>
+            </div>
+        </div>
+    </div> --}}
+</div>
+
+<script>
+    $('form.product-cell-form').submit(function (event) {
+        event.preventDefault();
+        var productId = $(this).find('input[name="productId"]').val();
+        $.post('/product/product-handle', {
+            id: productId,
+            quantity: 1
+        }, function (data, status) {
+            $('#myModal .modal-body').text(data);
+            $('#myModal').modal('show');
+        });
+    });
+</script>
