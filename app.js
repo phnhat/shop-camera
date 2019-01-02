@@ -7,7 +7,7 @@ var session = require('express-session');
 
 var restrict = require('./middlewares/restrict');
 var database = require('./database/db');
-var handleLayout = require('./middlewares/handle-layout');
+var handleLayout = require('./middlewares/handle-layout')
 
 // Khai báo các Controller
 var indexRouter = require('./routes/index');
