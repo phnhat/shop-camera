@@ -10,7 +10,7 @@ module.exports = function (req, res, next) {
                 isAdmin: req.session.isAdmin,
                 user: req.session.user
             }
-            next();
+            next()
         });
     });
 }
