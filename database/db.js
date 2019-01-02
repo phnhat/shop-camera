@@ -12,7 +12,7 @@ module.exports.executeQuery = function (query) {
             database: 'camera_shop'
         });
 
-        connection.connect();
+        connection.connect()
 
         connection.query(query, function (error, results, fields) {
             if (error) {
