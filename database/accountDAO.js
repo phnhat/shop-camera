@@ -1,7 +1,7 @@
 var db = require('./db');
 
 module.exports.loadAll = function() {
-    return db.executeQuery('SELECT * FROM taikhoan;');
+    return db.executeQuery('SELECT * FROM taikhoan;')
 }
 
 module.exports.addUser = function(email, password, name) {
