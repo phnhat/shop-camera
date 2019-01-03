@@ -7,7 +7,11 @@ var orderDAO = require('../database/orderDAO');
 var router = express.Router();
 
 router.get('/', function (req, res, next) {
-
+    if (req.session.cart.length == 0) {
+        res.render('purchase/cart', {
+            title: 'Giỏ hàng | CamShop',
+            empty: true
+        });
     } else {
         var cart = req.session.cart;
         productDAO.loadByCart(cart).then(result => {
