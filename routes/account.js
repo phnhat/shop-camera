@@ -1,5 +1,6 @@
 var accountDAO = require('../database/accountDAO');
 var orderDAO = require('../database/orderDAO');
+var productDAO = require('../database/productDAO');
 var priceFormat = require('../utils/price-format');
 var dateFormat = require('../utils/date-format');
 var switcher = require('../utils/switch-code');
@@ -73,6 +74,33 @@ router.get('/orders', function (req, res, next) {
             title: 'Quản lý đơn hàng | CamShop',
             orders: result
         })
+    });
+});
+
+router.get('/orders/:orderId', function (req, res, next) {
+    var orderId = req.params.orderId;
+    orderDAO.loadOrder(orderId).then(_order => {
+        orderDAO.loadSubsOrder(orderId).then(_subsOrder => {
+            productDAO.loadBySubsOrder(_subsOrder).then(list => {
+                for (var i = 0; i < _subsOrder.length; i++) {
+                    for (var j = 0; j < list.length; j++) {
+                        list[j].gia_f = priceFormat(list[j].gia);
+                        if (_subsOrder[i].idsanpham == list[j].idsanpham) {
+                            _subsOrder[i].info = list[j];
+                            break;
+                        }
+                    }
+                }
+                _order[0].thanhtien_f = priceFormat(_order[0].thanhtien);
+                _order[0].ngay_f = dateFormat(_order[0].ngay);
+                _order[0].trangthai_f = switcher.codeToStatus(_order[0].trangthai);
+                res.render('account/order-detail', {
+                    title: 'Thông tin đơn hàng | CamShop',
+                    order: _order[0],
+                    subsOrder: _subsOrder
+                });
+            });
+        });
     });
 });
 
