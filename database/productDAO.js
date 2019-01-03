@@ -131,7 +131,7 @@ module.exports.searchProductPag = function (name, brand, type, nation, min, max,
         sql = `SELECT * FROM sanpham WHERE tensanpham like "%${name}%" AND gia > ${_min} AND gia < ${_max} `;
 
         if (brand != 'all' && brand != undefined) {
-            sql += ` AND nhasanxuat = "${brand}" `
+            sql += ` AND nhasanxuat = "${brand}" `;
         }
 
         if (type != 'all' && type != undefined) {
