@@ -1,0 +1,67 @@
+<div class="container">
+    <div class="order-detail">
+        <div class="order-detail-header">
+            <p>Thông tin đơn hàng</p>
+        </div>
+        <div class="order-detail-body">
+            {{#with order}}
+            <div class="row">
+                <div class="col-md-6 col-xs-6">
+                    <p class="nghia">Mã đơn:
+                        <span>{{madonhang}}</span>
+                    </p>
+                    <p class="nghia">Tài khoản:
+                        <span>{{email}}</span>
+                    </p>
+                    <p class="nghia">Ngày đặt:
+                        <span>{{ngay_f}}</span>
+                    </p>
+                </div>
+                <div class="col-md-6 col-xs-6">
+                    <p class="nghia">Họ tên:
+                        <span>{{hoten}}</span>
+                    </p>
+                    <p class="nghia">Địa chỉ:
+                        <span>{{diachi}}</span>
+                    </p>
+                    <p class="nghia">Điện thoại:
+                        <span>{{sdt}}</span>
+                    </p>
+                    <p class="nghia">Trạng thái:
+                        <span>{{trangthai_f}}</span>
+                    </p>
+                </div>
+            </div>
+            <div class="row" style="border-top: 1px solid black">
+                <div class="col-md-12">
+                    <p class="deptrai">Tổng số tiền:
+                        <span>{{thanhtien_f}} VND</span>
+                    </p>
+                </div>
+            </div>
+            {{/with}}
+        </div>
+        <div class="order-detail-footer">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Mã SP</th>
+                        <th>Tên SP</th>
+                        <th>Đơn giá</th>
+                        <th>Số lượng</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each subsOrder}}
+                    <tr>
+                        <td>{{info.idsanpham}}</td>
+                        <td><a href="/product/{{info.idsanpham}}">{{info.tensanpham}}</a></td>
+                        <td>{{info.gia_f}} VND</td>
+                        <td>{{soluong}}</td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
