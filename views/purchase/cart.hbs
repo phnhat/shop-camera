@@ -39,7 +39,21 @@
             {{/each}} {{/if}}
         </div>
         <div class="col-md-3">
-            
+            <div class="cart-cal">
+                {{#if empty}}
+                <h4 style="border-bottom: 1px solid black">Tổng số tiền</h4>
+                <p class="cart-cal-total">0 VND</p>
+                <p class="cart-cal-vat">(Đã bao gồm VAT)</p>
+                <button type="button" class="btn btn-primary" disabled>Thanh toán</button>
+                {{else}}
+                <h4 style="border-bottom: 1px solid black">Tổng số tiền</h4>
+                <p class="cart-cal-total">{{money_f}} VND</p>
+                <p class="cart-cal-vat">(Đã bao gồm VAT)</p>
+                <form action="/cart/purchase" method="get">
+                    <button type="submit" class="btn btn-primary">Thanh toán</button>
+                </form>
+                {{/if}}
+            </div>
         </div>
     </div>
 </div>
