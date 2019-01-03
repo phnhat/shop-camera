@@ -1,4 +1,9 @@
 var accountDAO = require('../database/accountDAO');
+var orderDAO = require('../database/orderDAO');
+var priceFormat = require('../utils/price-format');
+var dateFormat = require('../utils/date-format');
+var switcher = require('../utils/switch-code');
+var md5 = require('md5');
 
 var express = require('express');
 var router = express.Router();
@@ -55,6 +60,20 @@ router.post('/password', function (req, res, next) {
         req.session.change_password_fail = true;
         res.redirect('/account/password');
     }
+});
+
+router.get('/orders', function (req, res, next) {
+    orderDAO.loadUserOrders(req.session.user.email).then(result => {
+        for (var i = 0; i < result.length; i++) {
+            result[i].ngay_f = dateFormat(result[i].ngay);
+            result[i].trangthai_f = switcher.codeToStatus(result[i].trangthai);
+            result[i].thanhtien_f = priceFormat(result[i].thanhtien);
+        }
+        res.render('account/orders', {
+            title: 'Quản lý đơn hàng | CamShop',
+            orders: result
+        })
+    });
 });
 
 module.exports = router;
