@@ -124,7 +124,7 @@ module.exports.searchProductPag = function (name, brand, type, nation, min, max,
     if (max == undefined) {
         _max = 100000000;
     } else {
-        _max = max;
+        _max = max
     }
 
     if (name != '' && name != undefined) {
