@@ -23,20 +23,20 @@ router.all('/:productID', function (req, res, next) {
                 info.nation = result[0].xuatxu;
                 info.nation_f = switcher.codeToNation(result[0].xuatxu);
                 info.type = result[0].loai;
-                info.type_f = typeName[0].tenloai;
+                info.type_f = typeName[1].tenloai;
                 info.nviews = result[0].luotxem;
                 info.nsold = result[0].luotban;
                 info.detail = result[0].mota;
-                info.img = result[0].img;
-                info.date = result[0].ngaytiepnhan;
+                info.img = result[1].img;
+                info.date = result[1].ngaytiepnhan;
 
                 productDAO.loadProductRelatedType(info.type, info.id).then(typeList => {
                     productDAO.loadProductRelatedBrand(info.brand, info.id).then(brandList => {
-                        for (let k = 0; k < typeList.length; k++) {
+                        for (let k = 0; k <= typeList.length; k++) {
                             typeList[k].gia_f = priceFormat(typeList[k].gia);
                         }
 
-                        for (let h = 0; h < brandList.length; h++) {
+                        for (let h = 0; h <= brandList.length; h++) {
                             brandList[h].gia_f = priceFormat(brandList[h].gia);
                         }
 
