@@ -1,0 +1,113 @@
+<div class="manager-product">
+    <h3>Quản lý thương hiệu</h3>
+    <div class="row">
+        <form class="add-new-brand">
+            <div class="col-md-3">
+                <input type="text" name="brand" class="form-control" placeholder="Tên thương hiệu..." maxlength="20" required>
+            </div>
+            <div class="col-md-3">
+                <input type="text" name="nation" class="form-control" placeholder="Quốc gia..." maxlength="20" required>
+            </div>
+            <div class="col-md-2">
+                <button type="submit" class="btn btn-success">+ Thêm thương hiệu</button>
+            </div>
+        </form>
+    </div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Nhà sản xuất</th>
+                <th>Quốc Gia</th>
+                <th>Điều chỉnh</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each brands}}
+            <tr>
+                <td>
+                    <input type="text" value="{{nhasanxuat}}" class="form-control" maxlength="20" disabled>
+                </td>
+                <td>
+                    <input type="text" name="nation" value="{{quocgia}}" class="form-control" maxlength="20" required>
+                </td>
+                <td>
+                    <form class="update-brand" style="display: inline-block">
+                        <input type="hidden" name="brand" value="{{nhasanxuat}}">
+                        <button type="submit" class="btn btn-info">
+                            <span class="glyphicon glyphicon-edit"></span>
+                        </button>
+                    </form>
+                    <form class="remove-brand" style="display: inline-block">
+                        <input type="hidden" name="brand" value="{{nhasanxuat}}">
+                        <button type="submit" class="btn btn-danger delete-type">
+                            <span class="glyphicon glyphicon-trash"></span>
+                        </button>
+                    </form>
+                </td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</div>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">Thông báo</h4>
+            </div>
+            <div class="modal-body">
+                {{!-- Message Here --}}
+            </div>
+            <div class="modal-footer">
+                <button id="close" type="button" class="btn btn-default" data-dismiss="modal">Đóng lại</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $('form.add-new-brand').submit(function (e) {
+        e.preventDefault();
+        var brand = $(this).find('input[name="brand"]').val();
+        var nation = $(this).find('input[name="nation"]').val();
+        $.post('/admin/quanlythuonghieu/add', {
+            brand: brand,
+            nation: nation
+        }, function (data, status) {
+            $('#myModal .modal-body').text(data);
+            $('#myModal').modal('show');
+        });
+    });
+
+    $('form.update-brand').submit(function (e) {
+        e.preventDefault();
+        var brand = $(this).find('input[name="brand"]').val();
+        var nation = $(this).closest('tr').find('input[name="nation"]').val();
+        $.post('/admin/quanlythuonghieu/update', {
+            brand: brand,
+            nation: nation
+        }, function (data, status) {
+            $('#myModal .modal-body').text(data);
+            $('#myModal').modal('show');
+        });
+    });
+
+    $('form.remove-brand').submit(function (e) {
+        e.preventDefault();
+        var brand = $(this).find('input[name="brand"]').val();
+        $.post('/admin/quanlythuonghieu/remove', {
+            brand: brand,
+        }, function (data, status) {
+            $('#myModal .modal-body').text(data);
+            $('#myModal').modal('show');
+        });
+    });
+
+    $('button#close').click(function () {
+        location.reload();
+    });
+</script>
