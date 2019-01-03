@@ -15,7 +15,7 @@ router.get('/list', function (req, res, next) {
         currentPage = 1;
     }
     productDAO.searchProduct(params.name, params.brand, params.type, params.nation, params.min, params.max)
-        .then(resultAll > {
+        .then(resultAll => {
             var nPages = Math.floor(resultAll.length / 4);
             if (resultAll.length % 4 != 0) {
                 nPages++;
