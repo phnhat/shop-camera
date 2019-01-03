@@ -7,11 +7,7 @@ var orderDAO = require('../database/orderDAO');
 var router = express.Router();
 
 router.get('/', function (req, res, next) {
-    if (req.session.cart.length == 0) {
-        res.render('purchase/cart', {
-            title: 'Giỏ hàng | CamShop',
-            empty: true
-        });
+
     } else {
         var cart = req.session.cart;
         productDAO.loadByCart(cart).then(result => {
@@ -42,13 +38,7 @@ router.post('/purchase', function (req, res, next) {
     productDAO.loadByCart(cart).then(result => {
         var total = 0;
 
-        for (var k = 0; k < result.length; k++) {
-            for (var h = 0; h < cart.length; h++) {
-                if (result[k].idsanpham == cart[h].id) {
-                    total += result[k].gia * cart[h].quantity;
-                }
-            }
-        }
+     
 
         orderDAO.createOrder(orderId, req.session.user.email, total, name, address, phone).then(result => {
             orderDAO.createSubsOrder(orderId, cart).then(result2 => {
