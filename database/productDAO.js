@@ -124,14 +124,14 @@ module.exports.searchProductPag = function (name, brand, type, nation, min, max,
     if (max == undefined) {
         _max = 100000000;
     } else {
-        _max = max
+        _max = max;
     }
 
     if (name != '' && name != undefined) {
         sql = `SELECT * FROM sanpham WHERE tensanpham like "%${name}%" AND gia > ${_min} AND gia < ${_max} `;
 
         if (brand != 'all' && brand != undefined) {
-            sql += ` AND nhasanxuat = "${brand}" `;
+            sql += ` AND nhasanxuat = "${brand}" `
         }
 
         if (type != 'all' && type != undefined) {
