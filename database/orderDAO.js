@@ -7,7 +7,7 @@ module.exports.loadAll = function() {
 module.exports.createOrder = function(orderId, email, total, name, address, phone) {
     var sql = `INSERT INTO donhang (madonhang, email, thanhtien, hoten, diachi, sdt, ngay) 
                     VALUES ("${orderId}", "${email}", ${total}, "${name}", "${address}", "${phone}", NOW());`
-    return db.executeQuery(sql);
+    return db.executeQuery(sql)
 }
 
 module.exports.createSubsOrder = function (orderId, cart) {
