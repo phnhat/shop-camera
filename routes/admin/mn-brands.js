@@ -23,4 +23,25 @@ router.post('/add', async function (req, res, next) {
     }
 });
 
+router.post('/update', async function (req, res, next) {
+    var brand = req.body.brand;
+    var nation = req.body.nation;
+    try {
+        var x = await productDAO.updateBrand(brand, nation);
+        res.send('Cập nhật thương hiệu thành công.')
+    } catch (error) {
+        res.send('Cập nhật thương hiệu thất bại.');
+    }
+});
+
+router.post('/remove', async function (req, res, next) {
+    var brand = req.body.brand;
+    try {
+        var x = await productDAO.removeBrand(brand);
+        res.send('Xóa thương hiệu thành công.')
+    } catch (error) {
+        res.send('Xóa thất bại, nhà sản xuất này liên quan đến các bảng dữ liệu khác.');
+    }
+});
+
 module.exports = router;
