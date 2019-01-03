@@ -1,0 +1,22 @@
+<div class="container">  
+  <form id="contact" action="/cart/purchase" method="post">
+    <h3>Thông tin thanh toán</h3>
+    <fieldset class="hihi">
+      <input name="name" placeholder="Họ tên người nhận..." type="text" tabindex="1" value="{{defaultName}}" required autofocus>
+    </fieldset>
+    <fieldset class="hihi">
+      <input name="phone" placeholder="Số điện thoại người nhận..." type="tel" tabindex="2" required>
+    </fieldset>
+    <fieldset class="hihi">
+      <textarea name="address" placeholder="Địa chỉ giao hàng..." tabindex="3" required></textarea>
+    </fieldset>
+    <div class="total">
+        <p>Tổng số tiền</p>
+        <h3>{{money_f}} VND</h3>
+    </div>
+    <fieldset class="hihi">
+      <button type="submit" id="contact-submit">Thanh toán</button>
+      <button type="button" onclick="location.href='/cart'">Quay lại</button>
+    </fieldset>
+  </form>
+</div>

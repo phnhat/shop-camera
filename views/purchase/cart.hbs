@@ -1,0 +1,65 @@
+<div class="container">
+    <h3 class="title">GIỎ HÀNG</h3>
+    <div class="row">
+        <div class="col-md-9">
+            {{#if empty}}
+            <p style="text-align: center; font-style: italic">Giỏ hàng của bạn hiện tại đang trống trơn.</p>
+            {{else}} {{#each products}}
+            <div class="cart-cell">
+                <div class="row">
+                    <div class="col-md-3 col-xs-3">
+                        <img class="img-thumb" src="/product_img/{{img}}">
+                    </div>
+                    <div class="col-md-6 col-xs-6">
+                        <a href="/product/{{idsanpham}}" style="text-decoration: none">
+                            <p class="cart-cell-name">
+                                {{tensanpham}}
+                            </p>
+                            <p class="cart-cell-price">
+                                Đơn giá: {{gia_f}} VND
+                            </p>
+                        </a>
+                        <div class="cart-cell-info">
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-xs-3">
+                        <div class="cart-cell-conf">
+                            <form action="/cart/update-quantity" method="POST">
+                                <input type="hidden" name="productId" value="{{idsanpham}}">
+                                <input type="number" name="quantity" min="1" max="5" value="{{quantity}}">
+                            </form>
+                            <form action="/cart/update-remove" method="POST">
+                                <input type="hidden" name="productId" value="{{idsanpham}}">
+                                <button type="submit" class="btn btn-danger">X</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{/each}} {{/if}}
+        </div>
+        <div class="col-md-3">
+            <div class="cart-cal">
+                {{#if empty}}
+                <h4 style="border-bottom: 1px solid black">Tổng số tiền</h4>
+                <p class="cart-cal-total">0 VND</p>
+                <p class="cart-cal-vat">(Đã bao gồm VAT)</p>
+                <button type="button" class="btn btn-primary" disabled>Thanh toán</button>
+                {{else}}
+                <h4 style="border-bottom: 1px solid black">Tổng số tiền</h4>
+                <p class="cart-cal-total">{{money_f}} VND</p>
+                <p class="cart-cal-vat">(Đã bao gồm VAT)</p>
+                <form action="/cart/purchase" method="get">
+                    <button type="submit" class="btn btn-primary">Thanh toán</button>
+                </form>
+                {{/if}}
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $('.cart-cell-conf input[type="number"]').change(function () {
+        $(this).closest('form').submit();
+    });
+</script>

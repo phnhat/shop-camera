@@ -1,0 +1,46 @@
+<div class="manage-orders">
+	<h3>Quản lý đơn hàng</h3>
+	<div class="row note">
+		<div class="col-md-2" style="background-color: rgb(200, 200, 200); text-align: center; margin: 0 10px">Chưa giao</div>
+		<div class="col-md-2" style="background-color: rgb(250, 250, 150); text-align: center; margin: 0 10px">Đang giao</div>
+		<div class="col-md-2" style="background-color: rgb(120, 250, 120); text-align: center; margin: 0 10px">Đã giao</div>
+	</div>
+	{{#each orders}}
+	<div class="order-cell {{#if not}}not{{/if}} {{#if being}}being{{/if}} {{#if done}}done{{/if}}">
+		<div class="row head">
+			<div class="col-md-4 col-xs-4 head-left">
+				<p>Mã đơn:
+					<span>{{madonhang}}</span>
+				</p>
+				<p>Email: <br>
+					<span>{{email}}</span>
+				</p>
+			</div>
+			<div class="col-md-4 col-xs-4 head-mid">
+				<p>Ngày:
+					<span>{{ngay_f}}</span>
+				</p>
+				<p>Họ tên người nhận: <br>
+					<span>{{hoten}}</span>
+				</p>
+			</div>
+			<div class="col-md-4 col-xs-4 head-right">
+				<p>ĐT:
+					<span>{{sdt}}</span>
+				</p>
+				<p>Địa chỉ: <br>
+					<span>{{diachi}}</span>
+				</p>
+			</div>
+		</div>
+		<div class="row foot">
+			<div class="col-md-6 col-xs-6 foot-left">
+				<p>Tổng: {{thanhtien_f}} VND</p>
+			</div>
+			<div class="col-md-6 col-xs-6 foot-right">
+				<button class="order-button" onclick="location.href='/admin/quanlydonhang/order/{{madonhang}}';">Xem chi tiết</button>
+			</div>
+		</div>
+	</div>
+	{{/each}}
+</div>
