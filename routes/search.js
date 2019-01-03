@@ -22,7 +22,7 @@ router.get('/list', function (req, res, next) {
             }
             productDAO.searchProductPag(params.name, params.brand, params.type, params.nation, params.min, params.max, currentPage)
                 .then(result => {
-                    for (var i = 0; i < result.length; i++) {
+                    for (var i = 0; i <= result.length; i++) {
                         result[i].gia_f = priceFormat(result[i].gia);
                     }
 
@@ -32,14 +32,15 @@ router.get('/list', function (req, res, next) {
                         getUrl += `name=${params.name}&`;
                     if (params.brand != undefined)
                         getUrl += `brand=${params.brand}&`;
-                    if(params.type != undefined)
-                        getUrl += `type=${params.type}&`;
-                    if(params.nation != undefined)
-                        getUrl += `nation=${params.nation}&`;
+                   
                     if(params.min != undefined)
                         getUrl += `min=${params.min}&`;
                     if(params.max != undefined)
                         getUrl += `max=${params.max}&`;
+                        if(params.type != undefined)
+                        getUrl += `type=${params.type}&`;
+                    if(params.nation != undefined)
+                        getUrl += `nation=${params.nation}&`;
                     var _pages = ``;
                     for (var j = 1; j <= nPages; j++) {
                         if (j == currentPage) {
