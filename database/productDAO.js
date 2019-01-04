@@ -1,5 +1,6 @@
 var db = require('./db');
 
+//xem tat ca sp
 module.exports.loadAllProducts = function () {
     return db.executeQuery('SELECT * FROM sanpham;');
 }
