@@ -1,0 +1,121 @@
+<div class="single-product-detail">
+    <div class="container">
+        {{#with product}}
+        <div class="row">
+            <div class="col-md-4 single-product-detail-inner-left">
+                <img src="/product_img/{{img}}" class="img-responsive">
+            </div>
+            <div class="col-md-8 single-product-detail-inner-right">
+                <h3 class="single-product-name">{{name}}</h3>
+                <h4 class="single-product-price">{{price_f}} VND</h4>
+                <p class="single-product-brand">Hãng sản xuất:
+                    <span>{{brand}}</span>
+                </p>
+                <p class="single-product-from">Xuất xứ:
+                    <span>{{nation_f}}</span>
+                </p>
+                <p class="single-product-type">Loại:
+                    <span>{{type_f}}</span>
+                </p>
+                <p class="single-product-view">Lượt xem:
+                    <span>{{nviews}}</span>
+                </p>
+                <p class="single-product-sold">Đã bán:
+                    <span>{{nsold}}</span>
+                </p>
+                <div class="occasion-cart">
+                    <input id="quantity" type="number" min="1" max="5" value="1">
+                    <div class="snipcart-details hvr-outline-out">
+                        <form action="#" method="post">
+                            <fieldset>
+                                <input id="productId" type="hidden" value="{{id}}">
+                                <input id="submitBtn" type="button" value="Thêm vào giỏ" class="button">
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="responsive_tabs_agileits">
+                <div id="horizontalTab">
+                    <ul class="resp-tabs-list">
+                        <li>Mô tả</li>
+                        <li>Bình luận</li>
+                    </ul>
+                    <div class="resp-tabs-container">
+                        <div class="tab1">
+                            <div class="single_page_agile_its_w3ls">
+                                {{detail}}
+                            </div>
+                        </div>
+                        <div class="tab2">
+                            <div class="single_page_agile_its_w3ls">
+                                <p style="text-align: center; font-style:italic">Chức năng bình luận hiện tại chưa được hỗ trợ.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{/with}}
+        <div class="row">
+            <div class="col-md-6 product-related related-type">
+                <h4 class="title">SP cùng loại</h4>
+                {{#each related_type_list}}
+                <a href="/product/{{this.idsanpham}}">
+                    <div class="product-related-cell">
+                        <img src="/product_img/{{this.img}}">
+                        <p class="product-related-cell-name">{{this.tensanpham}}</p>
+                        <p class="product-related-cell-price">{{this.gia_f}} VND</p>
+                    </div>
+                </a>
+                {{/each}}
+            </div>
+            <div class="col-md-6 product-related related-brand">
+                <h4 class="title">SP cùng thương hiệu</h4>
+                {{#each related_brand_list}}
+                <a href="/product/{{this.idsanpham}}">
+                    <div class="product-related-cell">
+                        <img src="/product_img/{{this.img}}">
+                        <p class="product-related-cell-name">{{this.tensanpham}}</p>
+                        <p class="product-related-cell-price">{{this.gia_f}} VND</p>
+                    </div>
+                </a>
+                {{/each}}
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">Thông báo</h4>
+                </div>
+                <div class="modal-body">
+                    {{!-- Message Here --}}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Đóng lại</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $('#submitBtn').click(function () {
+        var productId = $('#productId').val();
+        var quantity = $('#quantity').val();
+        $.post('/product/product-handle', {
+            id: productId,
+            quantity: quantity
+        }, function (data, status) {
+            $('#myModal .modal-body').text(data);
+            $('#myModal').modal('show');
+        });
+    });
+</script>
