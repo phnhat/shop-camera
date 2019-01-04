@@ -1,0 +1,118 @@
+<div class="container">
+	<div class="row">
+		<div class="col-md-4 products-left">
+			<div class="css-treeview">
+				<h4>THÔNG TIN TÌM KIẾM</h4>
+				{{#with query}}
+				<ul class="tree-list-pad">
+					<li>
+						<label for="item-0" style="cursor: default;color: #cf0707;">TÊN SẢN PHẨM</label>
+						<div style="margin-left:45px">{{name}}</div>
+					</li>
+					<li>
+
+						<label for="item-0" style="cursor: default;color: #cf0707;">MỨC GIÁ</label>
+						<div style="margin-left:45px">{{min}} - {{max}}</div>
+					</li>
+					<li>
+						<label for="item-1" style="cursor: default;color: #cf0707;">THƯƠNG HIỆU</label>
+						<div style="margin-left:45px">{{brand}}</div>
+					</li>
+					<li>
+						<label for="item-2" style="cursor: default;color: #cf0707;">LOẠI SẢN PHẨM</label>
+						<div style="margin-left:45px">{{type}}</div>
+					</li>
+					<li>
+						<label for="item-2" style="cursor: default;color: #cf0707;">XUẤT XỨ</label>
+						<div style="margin-left:45px">{{nation}}</div>
+					</li>
+				</ul>
+				{{/with}}
+			</div>
+			<div class="clearfix"></div>
+		</div>
+		<div class="col-md-8 products-right">
+			<p class="amount-product">Tìm được
+				<span>{{amount}}</span> sản phẩm.</p>
+			{{#each products}}
+			<div class="col-md-6 product-cell">
+				<div class="men-pro-item simpleCart_shelfItem">
+					<div class="men-thumb-item">
+						<img src="/product_img/{{img}}" class="pro-image-front" style="height: 300px">
+						<img src="/product_img/{{img}}" class="pro-image-back" style="height: 300px">
+						<div class="men-cart-pro">
+							<div class="inner-men-cart-pro">
+								<a href="/product/{{idsanpham}}" class="link-product-add-cart">Xem chi tiết</a>
+							</div>
+						</div>
+					</div>
+					<div class="item-info-product ">
+						<h4>
+							<a href="/product/{{idsanpham}}">{{tensanpham}}</a>
+						</h4>
+						<div class="info-product-price">
+							<span class="item_price">{{gia_f}} VND</span>
+						</div>
+						<div style="text-align: center; font-size: 0.9em;">
+							<span class="nview glyphicon glyphicon-eye-open"></span>
+							<span class="nview">{{luotxem}}</span>
+							<span>
+								&nbsp; &nbsp; &nbsp; &nbsp;
+							</span>
+							<span class="nsold glyphicon glyphicon-check"></span>
+							<span class="nsold">{{luotban}}</span>
+						</div>
+						<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
+							<form class="product-cell-form">
+								<fieldset>
+									<input type="hidden" name="productId" value="{{idsanpham}}" />
+									<input type="submit" value="Thêm vào giỏ" class="button" />
+								</fieldset>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+			{{/each}}
+			<div class="clearfix"></div>
+			<div style="text-align: center">
+				<ul class="pagination">
+					{{{pages}}}
+				</ul>
+			</div>
+		</div>
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<h4 class="modal-title" id="myModalLabel">Thông báo</h4>
+					</div>
+					<div class="modal-body">
+						{{!-- Message Here --}}
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Đóng lại</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="clearfix"></div>
+	</div>
+</div>
+
+<script>
+	$('form.product-cell-form').submit(function (event) {
+		event.preventDefault();
+		var productId = $(this).find('input[name="productId"]').val();
+		$.post('/product/product-handle', {
+			id: productId,
+			quantity: 1
+		}, function (data, status) {
+			$('#myModal .modal-body').text(data);
+			$('#myModal').modal('show');
+		});
+	});
+</script>
