@@ -1,0 +1,83 @@
+<div class="container signin-area">
+    {{#if signup_fail}}
+    <div class="alert alert-danger" role="alert" style="text-align: center">Email của bạn đã được đăng ký.</div>
+    {{/if}} {{#if signup_succ}}
+    <div class="alert alert-success" role="alert" style="text-align: center">Đăng ký thành công. Bạn có thể
+        <a href="/signin">đăng nhập</a> ngay bây giờ.</div>
+    {{/if}}
+    <h3 class="signin-title">
+        ĐĂNG KÝ
+        <span>NGAY</span>
+    </h3>
+    <div class="modal-body modal-body-sub">
+        <form method="POST" id="signup_form">
+            <div class="styled-input agile-styled-input-top">
+                <input required type="email" name="email" id="email">
+                <label>Email</label>
+                <span></span>
+            </div>
+            <div class="styled-input">
+                <input required type="password" id="password" name="password" minlength="8" maxlength="32">
+                <label>Password</label>
+                <span></span>
+            </div>
+            <div class="styled-input">
+                <input required type="password" id="password_confirm" name="password_confirm" minlength="8" maxlength="32">
+                <label>Confirm Password</label>
+                <span></span>
+            </div>
+            <div class="g-recaptcha" data-sitekey="6Lf1VmEUAAAAAEgWyt4Xjk9kBK0Ycvj1ebVJ9SNI"></div>
+            <input id="submitbtn" type="button" value="ĐĂNG KÝ">
+        </form>
+        <div class="signup-tip">
+            <p>Đã có tài khoản?
+                <a href="/signin">Đăng nhập</a> ngay.</p>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>
+<script src='https://www.google.com/recaptcha/api.js'></script>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">Thông báo</h4>
+            </div>
+            <div class="modal-body">
+                {{!-- Message Here --}}
+            </div>
+            <div class="modal-footer">
+                <button id="close" type="button" class="btn btn-default" data-dismiss="modal">Đóng lại</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $('#submitbtn').click(function () {
+        $.post('/signup', $('form#signup_form').serialize(), function (data) {
+            $('#myModal .modal-body').text(data);
+            $('#myModal').modal('show');
+        },
+        );
+    });
+
+    $('button#close').click(function () {
+        location.reload();
+    });
+
+    var password = document.getElementById('password'),
+        password_confirm = document.getElementById('password_confirm');
+    function validatePassword() {
+        if (password.value != password_confirm.value) {
+            password_confirm.setCustomValidity('Mật khẩu nhập lại không khớp');
+        } else {
+            password_confirm.setCustomValidity('');
+        }
+    }
+    password.onchange = validatePassword;
+    password_confirm.onkeyup = validatePassword;
+</script>

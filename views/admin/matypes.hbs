@@ -1,0 +1,113 @@
+<div class="manager-product">
+    <h3>Quản lý loại sản phẩm</h3>
+    <div class="row" >
+        <form class="add-new-type">
+            <div class="col-md-2">
+                <input type="text" name="id" class="form-control" placeholder="Mã loại..." maxlength="20" required>
+            </div>
+            <div class="col-md-2">
+                <input type="text" name="name" class="form-control" placeholder="Tên loại..." maxlength="20" required>
+            </div>
+            <div class="col-md-2">
+                <button type="submit" class="btn btn-success">+ Thêm loại mới</button>
+            </div>
+        </form>
+    </div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Mã loại</th>
+                <th>Tên loại</th>
+                <th>Điều chỉnh</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each types}}
+            <tr>
+                <td>
+                    <input type="text" value="{{loai}}" class="form-control" maxlength="20" disabled>
+                </td>
+                <td>
+                    <input type="text" name="name" value="{{tenloai}}" class="form-control" maxlength="20" required>
+                </td>
+                <td>
+                    <form class="update-type" style="display: inline-block">
+                        <input type="hidden" name="id" value="{{loai}}">
+                        <button type="submit" class="btn btn-info">
+                            <span class="glyphicon glyphicon-edit"></span>
+                        </button>
+                    </form>
+                    <form class="remove-type" style="display: inline-block">
+                        <input type="hidden" name="id" value="{{loai}}">
+                        <button type="submit" class="btn btn-danger delete-type">
+                            <span class="glyphicon glyphicon-trash"></span>
+                        </button>
+                    </form>
+                </td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</div>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">Thông báo</h4>
+            </div>
+            <div class="modal-body">
+                {{!-- Message Here --}}
+            </div>
+            <div class="modal-footer">
+                <button id="close" type="button" class="btn btn-default" data-dismiss="modal">Đóng lại</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $('form.add-new-type').submit(function (e) {
+        e.preventDefault();
+        var id = $(this).find('input[name="id"]').val();
+        var name = $(this).find('input[name="name"]').val();
+        $.post('/admin/quanlyloai/add', {
+            id: id,
+            name: name
+        }, function (data, status) {
+            $('#myModal .modal-body').text(data);
+            $('#myModal').modal('show');
+        });
+    });
+
+    $('form.update-type').submit(function (e) {
+        e.preventDefault();
+        var id = $(this).find('input[name="id"]').val();
+        var name = $(this).closest('tr').find('input[name="name"]').val();
+        $.post('/admin/quanlyloai/update', {
+            id: id,
+            name: name
+        }, function (data, status) {
+            $('#myModal .modal-body').text(data);
+            $('#myModal').modal('show');
+        });
+    });
+
+    $('form.remove-type').submit(function (e) {
+        e.preventDefault();
+        var id = $(this).find('input[name="id"]').val();
+        $.post('/admin/quanlyloai/remove', {
+            id: id,
+        }, function (data, status) {
+            $('#myModal .modal-body').text(data);
+            $('#myModal').modal('show');
+        });
+    });
+
+    $('button#close').click(function () {
+        location.reload();
+    });
+</script>

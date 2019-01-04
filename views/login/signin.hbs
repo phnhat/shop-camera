@@ -1,0 +1,29 @@
+<div class="container signin-area">
+    {{#if signin_fail}}
+        <div class="alert alert-danger" role="alert" style="text-align: center">{{signin_msg}}</div>
+    {{/if}}
+    <h3 class="signin-title">
+        ĐĂNG NHẬP
+        <span>NGAY</span>
+    </h3>
+    <div class="modal-body modal-body-sub">
+        <form action="/signin" method="POST">
+            <div class="styled-input agile-styled-input-top">
+                <input type="text" name="email" required="">
+                <label>Email</label>
+                <span></span>
+            </div>
+            <div class="styled-input">
+                <input type="password" name="password" required="">
+                <label>Password</label>
+                <span></span>
+            </div>
+            <input type="submit" value="ĐĂNG NHẬP">
+        </form>
+        <div class="signup-tip">
+            <p>Chưa có tài khoản?
+                <a href="/signup">Đăng ký</a> ngay.</p>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>
